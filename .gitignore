@@ -12,3 +12,7 @@ output/df_clean.rds
 
 # Windows system files
 Thumbs.db
+
+#Renv Files
+renv/library/
+renv/staging/
