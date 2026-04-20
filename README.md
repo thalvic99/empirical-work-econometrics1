@@ -42,7 +42,6 @@ records from a random Brazilian city, with the following variables:
 ├── empirical-work-econometrics1.Rproj   # RStudio project file
 ├── README.md
 ├── renv.lock                            # Package version lockfile
-├── .Rprofile                            # Activates renv on project open
 ├── data/
 │   └── empirical_work_dataset.csv
 ├── code/
