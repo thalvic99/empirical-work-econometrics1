@@ -1,0 +1,28 @@
+% latex table generated in R 4.5.3 by xtable 1.8-8 package
+% Mon Apr 20 02:53:35 2026
+\begin{table}[ht]
+\centering
+\caption{OLS Estimates: Effect of Smoking on Birth Weight. Dependent variable: birth weight in kilograms. Column (1): binary smoking dummy, no controls. Column (2): smoking level (trimesters), no controls. Column (3): smoking level (trimesters), with controls. Column (4): three smoking dummies (X1, X2, X3), with controls. Heteroskedasticity-robust standard errors in parentheses. All OLS estimates are biased due to endogeneity of smoking; see Section 1.1 for discussion. Baseline: Middle School education, age 15--20, low prenatal visits.} 
+\label{tab:ols}
+\begin{tabular}{lllll}
+  \toprule
+Variable & (1) & (2) & (3) & (4) \\ 
+  \midrule
+Smoked (binary) & -0.8494 (0.0017) &  &  &  \\ 
+  Smoked trimesters (level) &  & -0.3699 (7e-04) & -0.3635 (6e-04) &  \\ 
+  X1: smoked $>$= 1 trimester &  &  &  & -0.5997 (0.0018) \\ 
+  X2: smoked $>$= 2 trimesters &  &  &  & -0.3392 (0.0017) \\ 
+  X3: smoked $>$= 3 trimesters &  &  &  & -0.1419 (0.0018) \\ 
+  Education: High School &  &  & 0.0704 (0.0016) & 0.0661 (0.0015) \\ 
+  Education: College &  &  & 0.1376 (0.0019) & 0.1269 (0.0019) \\ 
+  Education: Masters &  &  & 0.194 (0.0022) & 0.1784 (0.0021) \\ 
+  Age: 21-25 &  &  & -0.0138 (0.0014) & -0.0011 (0.0014) \\ 
+  Age: 26-30 &  &  & -0.017 (0.0025) & 0.0027 (0.0024) \\ 
+  Age: 31-40 &  &  & 0.0154 (0.0023) & 2e-04 (0.0022) \\ 
+  Prenatal visits (high) &  &  & 0.2922 (0.0013) & 0.2925 (0.0013) \\ 
+  Controls & No & No & Yes & Yes \\ 
+  N & 440,856 & 440,856 & 440,856 & 440,856 \\ 
+  R-squared & 0.358 & 0.41 & 0.481 & 0.517 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}

@@ -8,6 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(lmtest)
 library(sandwich)
+library(xtable)
 
 # ---- Load data ----
 df <- read.csv("data/empirical_work_dataset.csv")
@@ -27,6 +28,20 @@ df$X3 <- as.integer(df$smoked_trimesters >= 3)
 # Save cleaned data object for use in subsequent scripts
 saveRDS(df, "output/df_clean.rds")
 
+# ---- Helper: export table to LaTeX ----
+save_tex <- function(tbl, filename, caption, label, digits = 3) {
+  xt <- xtable(tbl,
+               caption = caption,
+               label   = label,
+               digits  = digits)
+  print(xt,
+        include.rownames  = FALSE,
+        caption.placement = "top",
+        booktabs          = TRUE,
+        file              = file.path("output/tables", filename))
+  cat("LaTeX table saved:", filename, "\n")
+}
+
 # ============================================================
 # TABLE 1: DESCRIPTIVE STATISTICS
 # ============================================================
@@ -35,10 +50,10 @@ desc_vars <- list(
   "Smoked trimesters"        = df$smoked_trimesters,
   "Support group (Z)"        = df$support_group,
   "Prenatal visits (high)"   = df$prenatal_high,
-  "Age: 15-20"               = as.integer(df$age_group == "15-20"),
-  "Age: 21-25"               = as.integer(df$age_group == "21-25"),
-  "Age: 26-30"               = as.integer(df$age_group == "26-30"),
-  "Age: 31-40"               = as.integer(df$age_group == "31-40"),
+  "Age: 15--20"              = as.integer(df$age_group == "15-20"),
+  "Age: 21--25"              = as.integer(df$age_group == "21-25"),
+  "Age: 26--30"              = as.integer(df$age_group == "26-30"),
+  "Age: 31--40"              = as.integer(df$age_group == "31-40"),
   "Education: Middle School" = as.integer(df$education == "Middle School"),
   "Education: High School"   = as.integer(df$education == "High School"),
   "Education: College"       = as.integer(df$education == "College"),
@@ -58,16 +73,21 @@ tbl1[,-1] <- round(tbl1[,-1], 3)
 cat("\n--- TABLE 1: Descriptive Statistics (N =", nrow(df), ") ---\n")
 print(tbl1)
 write.csv(tbl1, "output/tables/table1_descriptive.csv", row.names = FALSE)
+save_tex(tbl1,
+         filename = "table1_descriptive.tex",
+         caption  = paste0("Descriptive Statistics (N = ",
+                           format(nrow(df), big.mark=","), ")"),
+         label    = "tab:descriptive")
 
 # ============================================================
 # TABLE 2: BALANCE TEST
 # ============================================================
 balance_vars <- list(
   "Prenatal visits (high)"   = df$prenatal_high,
-  "Age: 15-20"               = as.integer(df$age_group == "15-20"),
-  "Age: 21-25"               = as.integer(df$age_group == "21-25"),
-  "Age: 26-30"               = as.integer(df$age_group == "26-30"),
-  "Age: 31-40"               = as.integer(df$age_group == "31-40"),
+  "Age: 15--20"              = as.integer(df$age_group == "15-20"),
+  "Age: 21--25"              = as.integer(df$age_group == "21-25"),
+  "Age: 26--30"              = as.integer(df$age_group == "26-30"),
+  "Age: 31--40"              = as.integer(df$age_group == "31-40"),
   "Education: Middle School" = as.integer(df$education == "Middle School"),
   "Education: High School"   = as.integer(df$education == "High School"),
   "Education: College"       = as.integer(df$education == "College"),
@@ -81,11 +101,12 @@ bal_results <- lapply(names(balance_vars), function(vname) {
   m1 <- mean(y[z == 1])
   tt <- t.test(y[z == 1], y[z == 0])
   data.frame(
-    Variable = vname,
-    Mean_Z0  = round(m0, 3),
-    Mean_Z1  = round(m1, 3),
-    Diff     = round(m1 - m0, 3),
-    P_value  = round(tt$p.value, 3)
+    Variable           = vname,
+    "No support (Z=0)" = round(m0, 3),
+    "Support (Z=1)"    = round(m1, 3),
+    Difference         = round(m1 - m0, 3),
+    "P-value"          = round(tt$p.value, 3),
+    check.names        = FALSE
   )
 })
 
@@ -95,8 +116,15 @@ rownames(tbl2) <- NULL
 cat("\n--- TABLE 2: Balance Test ---\n")
 print(tbl2)
 cat("Note: P-values from two-sided t-tests.\n")
-cat("Pre-determined variables should show no significant differences.\n")
 write.csv(tbl2, "output/tables/table2_balance.csv", row.names = FALSE)
+save_tex(tbl2,
+         filename = "table2_balance.tex",
+         caption  = paste("Balance Test: Pre-determined Characteristics by",
+                          "Support Group Assignment.",
+                          "P-values from two-sided t-tests.",
+                          "No statistically significant differences support",
+                          "random assignment of the instrument."),
+         label    = "tab:balance")
 
 # ============================================================
 # FIGURE 1: Mean birth weight by smoking level
@@ -114,17 +142,17 @@ p1 <- ggplot(means_by_s, aes(x = factor(smoked_trimesters), y = mean_weight)) +
   geom_errorbar(aes(ymin = mean_weight - 1.96*se,
                     ymax = mean_weight + 1.96*se), width = 0.2) +
   labs(
-    title   = "Figure 1: Mean Birth Weight by Trimesters Smoked",
+    title    = "Figure 1: Mean Birth Weight by Trimesters Smoked",
     subtitle = "Error bars represent 95% confidence intervals",
-    x       = "Trimesters smoked during pregnancy",
-    y       = "Mean birth weight (kg)",
-    caption = "Note: Raw means, not controlling for confounders. N = 440,856."
+    x        = "Trimesters smoked during pregnancy",
+    y        = "Mean birth weight (kg)",
+    caption  = "Note: Raw means, not controlling for confounders. N = 440,856."
   ) +
   theme_bw(base_size = 13)
 
 ggsave("output/figures/figure1_birthweight_by_smoking.png",
        p1, width = 7, height = 5, dpi = 150)
-cat("\nFigure 1 saved.\n")
+cat("Figure 1 saved.\n")
 
 # ============================================================
 # FIGURE 2: First stage heterogeneity by age group
@@ -146,8 +174,9 @@ p2 <- ggplot(fs_age, aes(x = age_group, y = mean_S, fill = support_group)) +
     y        = "Mean trimesters smoked",
     fill     = "",
     caption  = paste("Note: The gap between bars within each age group represents",
-                     "the first stage effect of Z.\nThis heterogeneity across age",
-                     "groups is the source of identification in Caetano & Escanciano (2021).")
+                     "the first stage effect of Z.",
+                     "\nHeterogeneity across age groups drives identification",
+                     "in Caetano & Escanciano (2021).")
   ) +
   theme_bw(base_size = 13) +
   theme(legend.position = "bottom")
