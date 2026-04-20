@@ -19,10 +19,12 @@ constant marginal effects is rejected at all conventional significance levels
 
 Caetano, C. and J. C. Escanciano (2021). Identifying multiple marginal effects
 with a single instrument. *Econometric Theory* 37(3), 464–494.
+Joshua D. Angrist and Jorn-Steffen Pischke. Mostly Harmless Econometrics. Princeton Uni-
+versity Press, 2009.
 
 ## Data
 
-The dataset (`data/empirical_work_dataset.csv`) contains 440,856 simulated birth
+The dataset (`data/empirical_work_dataset.csv`) contains 440,856 birth
 records from a random Brazilian city, with the following variables:
 
 | Variable            | Role          | Description                                        |
@@ -88,10 +90,6 @@ records from a random Brazilian city, with the following variables:
    ```r
    source("code/00_master.R")
    ```
-
-All figures and tables will be saved to `output/figures/` and `output/tables/`.
-LaTeX `.tex` files can be imported into Overleaf using `\input{tables/tableX_name}`.
-Remember to add `\usepackage{booktabs}` to the Overleaf preamble.
 
 ### Without renv (alternative)
 
