@@ -13,6 +13,6 @@ output/df_clean.rds
 # Windows system files
 Thumbs.db
 
-#Renv Files
+# Prevent Large Files from renv
 renv/library/
 renv/staging/
