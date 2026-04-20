@@ -104,9 +104,9 @@ Note that different package versions may produce slightly different results.
 
 | Script | Tables produced | Figures produced |
 |--------|----------------|-----------------|
-| `01_data_and_benchmarks.R` | Tables 1–4 + heterogeneity table | Figures 1–2 |
-| `02_iv_estimation.R` | Table 5 | — |
-| `03_tests.R` | Tables 6–7 | — |
+| `01_data_and_benchmarks.R` | Tables 3–7 | Figures 1–2 |
+| `02_iv_estimation.R` | Table 8 | — |
+| `03_tests.R` | Tables 9-10 | — |
 
 ## Implementation Notes
 
