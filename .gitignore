@@ -6,6 +6,7 @@
 
 # Intermediate data files
 output/df_clean.rds
+output/ce_tsls_results.rds
 
 # Mac system files
 .DS_Store
