@@ -39,9 +39,10 @@ records from a random Brazilian city, with the following variables:
 ## Repository Structure
 
 ```
-├── empirical-work-econometrics1.Rproj   # RStudio project file
+├── empirical-work-econometrics1.Rproj   # RStudio project file — open this first
 ├── README.md
 ├── renv.lock                            # Package version lockfile
+├── .Rprofile                            # Activates renv on project open
 ├── data/
 │   └── empirical_work_dataset.csv
 ├── code/
@@ -62,7 +63,9 @@ records from a random Brazilian city, with the following variables:
 │   │   ├── table4_ols.tex               # OLS benchmarks
 │   │   ├── table5_main_results.tex      # Main results: OLS vs IV vs CE-TSLS
 │   │   ├── table6_tests.tex             # Tests for constant marginal effects
-│   │   └── table7_robustness.tex        # Robustness: prenatal visits
+│   │   ├── table7_robustness.tex        # Robustness: prenatal visits
+│   │   ├── table_fs_heterogeneity.tex   # First stage heterogeneity by age group
+│   │   └── table_separability.tex       # Separability test
 │   └── ce_tsls_results.rds             # Saved CE-TSLS results (intermediate)
 └── report/
     └── empirical_work.pdf               # Final submitted report
@@ -125,7 +128,7 @@ Note that different package versions may produce slightly different results.
 
 - **Robustness check** in `03_tests.R` runs all IV specifications with and
   without prenatal visits as a control, addressing the bad control concern
-  raised by the balance test (Table 2).
+  raised by the balance test (Table 4).
 
 ## Software and Package Versions
 
