@@ -1,0 +1,14 @@
+# R generated files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Intermediate data files
+output/df_clean.rds
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
