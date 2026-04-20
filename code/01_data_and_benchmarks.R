@@ -42,11 +42,14 @@ save_tex <- function(tbl, filename, caption, label, digits=3) {
         caption.placement      = "top",
         booktabs               = TRUE,
         sanitize.text.function = identity,
+        table.placement        = "h!",
+        size                   = "small",
         file = file.path("output/tables", filename))
   cat("Saved:", filename, "\n")
 }
 
-fmt <- function(e, s) paste0(round(e,4), " (", round(s,4), ")")
+fmt <- function(e, s) paste0(formatC(e, digits=3, format="f"), 
+                             " (", formatC(s, digits=3, format="f"), ")")
 
 extract <- function(ct, v) {
   if (!v %in% rownames(ct)) return("")
@@ -111,13 +114,20 @@ balance_vars <- list(
 bal_results <- lapply(names(balance_vars), function(vname) {
   y  <- balance_vars[[vname]]
   z  <- df$support_group
-  tt <- t.test(y[z==1], y[z==0])
+  m0 <- mean(y[z == 0])
+  m1 <- mean(y[z == 1])
+  tt <- t.test(y[z == 1], y[z == 0])
+  
+  # Format p-value
+  pval <- tt$p.value
+  pval_fmt <- if (pval < 0.001) "$<$0.001" else formatC(pval, digits=3, format="f")
+  
   data.frame(
     Variable          = vname,
-    "No support (Z=0)" = round(mean(y[z==0]), 3),
-    "Support (Z=1)"    = round(mean(y[z==1]), 3),
-    Difference        = round(mean(y[z==1]) - mean(y[z==0]), 3),
-    "P-value"         = round(tt$p.value, 3),
+    "No support (Z=0)" = formatC(m0, digits=3, format="f"),
+    "Support (Z=1)"    = formatC(m1, digits=3, format="f"),
+    Difference        = formatC(m1 - m0, digits=3, format="f"),
+    "P-value"         = pval_fmt,
     check.names       = FALSE
   )
 })
@@ -264,6 +274,8 @@ p2 <- ggplot(fs_age, aes(x=age_group, y=mean_S, fill=support_group)) +
   theme_bw(base_size=13) +
   theme(legend.position="bottom")
 
+print(p2)
+
 ggsave("output/figures/figure2_firststage_heterogeneity.png",
        p2, width=7, height=5, dpi=150)
 cat("Figure 2 saved.\n")
@@ -316,10 +328,10 @@ tbl4 <- do.call(rbind, out_rows)
 
 footer4 <- data.frame(
   Variable = c("Controls","N","R-squared"),
-  "(1)"    = c("No",  format(nrow(df),big.mark=","), round(summary(ols1)$r.squared,3)),
-  "(2)"    = c("No",  format(nrow(df),big.mark=","), round(summary(ols2)$r.squared,3)),
-  "(3)"    = c("Yes", format(nrow(df),big.mark=","), round(summary(ols3)$r.squared,3)),
-  "(4)"    = c("Yes", format(nrow(df),big.mark=","), round(summary(ols4)$r.squared,3)),
+  "(1)"    = c("No",  format(nrow(df),big.mark=","), formatC(summary(ols1)$r.squared, digits=3, format="f")),
+  "(2)"    = c("No",  format(nrow(df),big.mark=","), formatC(summary(ols2)$r.squared, digits=3, format="f")),
+  "(3)"    = c("Yes", format(nrow(df),big.mark=","), formatC(summary(ols3)$r.squared, digits=3, format="f")),
+  "(4)"    = c("Yes", format(nrow(df),big.mark=","), formatC(summary(ols4)$r.squared, digits=3, format="f")),
   check.names = FALSE
 )
 colnames(footer4) <- colnames(tbl4)
@@ -366,6 +378,8 @@ p1 <- ggplot(means_by_s, aes(x=factor(smoked_trimesters), y=mean_weight)) +
     caption  = "Note: Raw means, not controlling for confounders. N = 440,856."
   ) +
   theme_bw(base_size=13)
+
+print(p1)
 
 ggsave("output/figures/figure1_birthweight_by_smoking.png",
        p1, width=7, height=5, dpi=150)

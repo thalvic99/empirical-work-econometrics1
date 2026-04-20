@@ -1,0 +1,28 @@
+% latex table generated in R 4.5.3 by xtable 1.8-8 package
+% Mon Apr 20 19:59:26 2026
+\begin{table}[h!]
+\centering
+\caption{Robustness Check: With and Without Prenatal Visits as Control. Dependent variable: birth weight in kilograms. Columns (1) and (3) exclude prenatal visits from controls. Columns (2) and (4) include prenatal visits as control. The balance test (Table~\ref{tab:balance}) shows the support group significantly increases prenatal visits, suggesting it may be a mediator rather than an exogenous covariate. The stability of estimates across columns confirms that heterogeneous marginal effects hold regardless of how prenatal visits are treated. Robust standard errors (HC1) in parentheses. Baseline: Middle School, age 15--20.} 
+\label{tab:robustness}
+\begingroup\small
+\begin{tabular}{lllll}
+  \toprule
+Variable & Simple IV (1) & Simple IV (2) & CE-TSLS (3) & CE-TSLS (4) \\ 
+  \midrule
+$\beta_1$: smoked $\geq 1$ trimester &  &  & -0.565 (0.040) & -0.569 (0.038) \\ 
+  $\beta_2$: smoked $\geq 2$ trimesters &  &  & -0.414 (0.044) & -0.382 (0.043) \\ 
+  $\beta_3$: smoked $\geq 3$ trimesters &  &  & -0.108 (0.047) & -0.104 (0.045) \\ 
+  Smoked trimesters (level) & -0.380 (0.001) & -0.365 (0.001) &  &  \\ 
+  Education: High School & 0.070 (0.002) & 0.070 (0.002) & 0.066 (0.002) & 0.066 (0.002) \\ 
+  Education: College & 0.135 (0.003) & 0.138 (0.002) & 0.125 (0.003) & 0.127 (0.003) \\ 
+  Education: Masters & 0.193 (0.003) & 0.194 (0.003) & 0.178 (0.003) & 0.179 (0.003) \\ 
+  Age: 21--25 & -0.014 (0.002) & -0.014 (0.002) & -0.002 (0.002) & -0.001 (0.002) \\ 
+  Age: 26--30 & -0.019 (0.003) & -0.017 (0.003) & 0.002 (0.004) & 0.004 (0.004) \\ 
+  Age: 31--40 & 0.012 (0.003) & 0.015 (0.003) & -0.004 (0.004) & -0.002 (0.003) \\ 
+  Prenatal visits (high) &  & 0.292 (0.002) &  & 0.292 (0.002) \\ 
+  Prenatal control & No & Yes & No & Yes \\ 
+  N & 440,856 & 440,856 & 440,856 & 440,856 \\ 
+   \bottomrule
+\end{tabular}
+\endgroup
+\end{table}

@@ -1,0 +1,4 @@
+"Interaction term","Estimate","Std. Error","t-stat","P-value"
+"Age group 21--25 $\times$ $\hat{X}_1$",0.5299,0.0585,9.053,"$<$0.001"
+"Age group 26--30 $\times$ $\hat{X}_1$",-0.218,0.0693,-3.146,"0.002"
+"Age group 31--40 $\times$ $\hat{X}_1$",0.2855,0.1021,2.798,"0.005"

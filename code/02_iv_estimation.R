@@ -27,11 +27,14 @@ save_tex <- function(tbl, filename, caption, label) {
         caption.placement      = "top",
         booktabs               = TRUE,
         sanitize.text.function = identity,
+        table.placement        = "h!",
+        size                   = "small",
         file = file.path("output/tables", filename))
   cat("Saved:", filename, "\n")
 }
 
-fmt <- function(e, s) paste0(round(e,4), " (", round(s,4), ")")
+fmt <- function(e, s) paste0(formatC(e, digits=3, format="f"), 
+                             " (", formatC(s, digits=3, format="f"), ")")
 
 get_val <- function(ct, v) {
   if (!v %in% rownames(ct)) return("")
