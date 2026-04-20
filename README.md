@@ -61,7 +61,7 @@ from a simulated Brazilian city, with the following variables:
 
 3. Install required packages (first time only):
    ```r
-   install.packages(c("AER", "dplyr", "ggplot2", "lmtest", "sandwich"))
+   install.packages(c("AER", "dplyr", "ggplot2", "lmtest", "sandwich", "xtable"))
    ```
 
 4. Run the master script:
