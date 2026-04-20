@@ -1,4 +1,0 @@
-"Test","Statistic","Distribution","P_value","Conclusion"
-"$H_0: \beta_1 = \beta_2$",-2.418,"$t$",0.0156,"Reject $H_0$"
-"$H_0: \beta_2 = \beta_3$",-3.304,"$t$",0.001,"Reject $H_0$"
-"$H_0: \beta_1 = \beta_2 = \beta_3$",52.492,"$F(2, N-k)$",0,"Reject $H_0$"
