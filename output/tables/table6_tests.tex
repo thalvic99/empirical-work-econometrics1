@@ -1,0 +1,16 @@
+% latex table generated in R 4.5.3 by xtable 1.8-8 package
+% Mon Apr 20 17:17:33 2026
+\begin{table}[ht]
+\centering
+\caption{Tests for Constant Marginal Effects. All tests based on CE-TSLS estimates from Table~\ref{tab:main_results}. Tests 1 and 2 are t-tests on pairwise differences of marginal effects, using the joint variance-covariance matrix of the second-stage estimator. Test 3 is a joint Wald F-test of $\beta_1 = \beta_2 = \beta_3$. All three tests reject the null of constant marginal effects at the 5\% significance level.} 
+\label{tab:tests}
+\begin{tabular}{lrlrl}
+  \toprule
+Test & Statistic & Distribution & P-value & Conclusion \\ 
+  \midrule
+$H_0: \beta_1 = \beta_2$ & -2.42 & $t$ & 0.02 & Reject $H_0$ \\ 
+  $H_0: \beta_2 = \beta_3$ & -3.30 & $t$ & 0.00 & Reject $H_0$ \\ 
+  $H_0: \beta_1 = \beta_2 = \beta_3$ & 52.49 & $F(2, N-k)$ & 0.00 & Reject $H_0$ \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
